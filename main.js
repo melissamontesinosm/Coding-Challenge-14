@@ -27,7 +27,10 @@ async function fetchTickets() {
         // Handle any errors that occurred during the fetch or data handling.
         errorMessage.textContent = `Error: ${error.message}`; // Display the error message in the HTML element.
     }
-}
+        // Task 4: Use finally to Ensure Cleanup
+    } finally {
+        console.log('Fetch attempt completed!'); // Logs a message indicating the fetch process has ended, useful for stopping any loading indicators if present.
+    }
 
 
 // Task 3: Display Tickets Dynamically on the Page
