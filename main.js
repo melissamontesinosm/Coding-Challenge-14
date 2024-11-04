@@ -29,3 +29,30 @@ async function fetchTickets() {
     }
 }
 
+
+// Task 3: Display Tickets Dynamically on the Page
+
+function displayTickets(tickets) {
+    const ticketContainer = document.getElementById('ticketContainer');
+    ticketContainer.innerHTML = ''; // Clear previous content in the ticket container.
+
+    // Loop through each ticket in the tickets array to create and display ticket elements.
+    tickets.forEach(ticket => { 
+        const ticketElement = document.createElement('div');
+        ticketElement.classList.add('ticket'); // Add 'ticket' class to the new div for styling.
+
+        // Set up the HTML structure for each ticket, displaying ID, customer name, issue description, and details.
+        ticketElement.innerHTML = `
+            <h3>Ticket ID: ${ticket.id}</h3>
+            <p>Customer Name: User ${ticket.userId}</p>
+            <p>Issue Description: ${ticket.title}</p> 
+            <p>Details: ${ticket.body}</p>
+        `;
+
+        // Append the ticket element to the main ticket container in the DOM.
+        ticketContainer.appendChild(ticketElement); 
+    });
+}
+
+// Call fetchTickets to start fetching and displaying tickets.
+fetchTickets();
