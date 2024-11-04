@@ -9,19 +9,36 @@
         body {
             font-family: Georgia, 'Times New Roman', Times, serif;
             background-color: rgb(244, 183, 183);
+            margin: 0;
+            padding: 20px;
         }
 
         header {
             text-align: center;
             font-size: xx-large;
-            margin-top: auto;
             color: darkred;
+            margin-bottom: 20px;
         }
 
-        .ticketContainer{
+        .ticket-container {
             display: grid;
-            grid-auto-columns: max-content;
-            grid-auto-rows: max-content;
+            gap: 15px;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+        }
+
+        .error-message {
+            color: red;
+            text-align: center;
+            font-weight: bold;
+            margin-bottom: 15px;
+        }
+
+        .ticket {
+            padding: 15px;
+            background-color: #fff;
+            border: 1px solid #ccc;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
         }
     </style>
 </head>
@@ -29,8 +46,8 @@
     <header>
         <h1>Customer Support Tickets</h1>
     </header>
-    <div class="error-Message" id="errorMessage"></div>
-    <div class="ticket-Container" id="ticketContainer"></div>
+    <div class="error-message" id="errorMessage"></div>
+    <div class="ticket-container" id="ticketContainer"></div>
     <script src="main.js"></script>
 </body>
 </html>

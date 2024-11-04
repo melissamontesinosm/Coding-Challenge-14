@@ -1,50 +1,40 @@
-
-// Task 2: Fetch Tickets Using Async/Await and Handle Errors
-
 async function fetchTickets() {
     const apiEndpoint = 'https://jsonplaceholder.typicode.com/posts'; // API endpoint to fetch ticket data.
-    const ticketContainer = document.getElementById('ticketContainer'); // HTML container to display the tickets.
-    const errorMessage = document.getElementById('errorMessage'); // HTML element to show any error messages.
+    const ticketContainer = document.getElementById('ticketContainer'); // Container to display tickets.
+    const errorMessage = document.getElementById('errorMessage'); // Element to display error messages.
 
     try { 
-        // Fetching data from the API. Await pauses the function until the fetch promise is resolved.
+        // Fetch data from the API. Await pauses until the fetch promise is resolved.
         const response = await fetch(apiEndpoint); 
-        // Check if the HTTP response is not OK (e.g., 404 or 500), then throw an error to handle it in the catch block.
         if (!response.ok) {
-            throw new Error('Network response was not okay');
+            throw new Error('Failed to fetch tickets. Please try again later.');
         }
-        // Parse the response as JSON data after the fetch is successful.
+
+        // Parse response as JSON after successful fetch.
         const data = await response.json();
 
-        // If the returned data is an empty array, throw an error to indicate no tickets are available.
+        // Check if data is empty and display an error if so.
         if (data.length === 0) { 
-            throw new Error('No tickets available');
+            throw new Error('No tickets available.');
         }
 
-        // If there are tickets, call the displayTickets function to render them on the page.
+        // Render tickets if data is available.
         displayTickets(data);
     } catch (error) { 
-        // Handle any errors that occurred during the fetch or data handling.
-        errorMessage.textContent = `Error: ${error.message}`; // Display the error message in the HTML element.
-    }
-        // Task 4: Use finally to Ensure Cleanup
+        errorMessage.textContent = `Error: ${error.message}`; // Display error message in the UI.
     } finally {
-        console.log('Fetch attempt completed!'); // Logs a message indicating the fetch process has ended, useful for stopping any loading indicators if present.
+        console.log('Fetch attempt completed!'); // Message to signal fetch process completion, useful for stopping loading indicators.
     }
-
-
-// Task 3: Display Tickets Dynamically on the Page
+}
 
 function displayTickets(tickets) {
     const ticketContainer = document.getElementById('ticketContainer');
-    ticketContainer.innerHTML = ''; // Clear previous content in the ticket container.
+    ticketContainer.innerHTML = ''; // Clear previous tickets.
 
-    // Loop through each ticket in the tickets array to create and display ticket elements.
     tickets.forEach(ticket => { 
         const ticketElement = document.createElement('div');
-        ticketElement.classList.add('ticket'); // Add 'ticket' class to the new div for styling.
+        ticketElement.classList.add('ticket'); // Style each ticket with a class.
 
-        // Set up the HTML structure for each ticket, displaying ID, customer name, issue description, and details.
         ticketElement.innerHTML = `
             <h3>Ticket ID: ${ticket.id}</h3>
             <p>Customer Name: User ${ticket.userId}</p>
@@ -52,10 +42,10 @@ function displayTickets(tickets) {
             <p>Details: ${ticket.body}</p>
         `;
 
-        // Append the ticket element to the main ticket container in the DOM.
         ticketContainer.appendChild(ticketElement); 
     });
 }
 
-// Call fetchTickets to start fetching and displaying tickets.
+// Start the fetch process to display tickets.
 fetchTickets();
+
